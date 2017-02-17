@@ -1,5 +1,6 @@
 public class KnightBoard{
     public int[][] Board;
+    public static final int[] rows = 
 
     public KnightBoard(int startingRows, int startingCols){
 	Board = new int[startingRows][startingCols];
@@ -49,6 +50,64 @@ public class KnightBoard{
 		}
 	    }
 	}
+    }
+
+    private boolean solveH(int r ,int c, int level){
+	if (Board[r][c] == 0){
+	    Board[r][c] = level;
+	    int count = 0;
+	    for (int row = 0; row < Board.length; row ++){
+		for (int col = 0; col < Board[0].length && (Board[row][col] != 0); col ++){
+		    count ++;
+		}
+	    }
+	    if (count == (Board.length * Board[0].length)){
+		return true;
+	    }
+	    try{
+		if (solveH(r + 1, c + 2, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    try{
+		if (solveH(r + 1, c - 2, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    try{
+		if (solveH(r + 2, c + 1, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    try{
+		if (solveH(r + 2, c - 1, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    try{
+		if (solveH(r - 1, c + 2, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    try{
+		if (solveH(r - 1, c - 2, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    try{
+		if (solveH(r - 2, c + 1, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    try{
+		if (solveH(r - 2, c - 1, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    Board[r][c] = 0;
+	    return false;
+	}
+	return false;
     }
 
     private boolean solveH(int r ,int c, int level){
