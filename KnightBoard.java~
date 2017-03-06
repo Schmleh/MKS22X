@@ -50,7 +50,7 @@ public class KnightBoard{
 		if (solveH(r, c, 1)) {
 		    break;
 		}
-		Board[r][c] = 0;
+		Board[r][r] = 0;
 	    }
 	}
     }
