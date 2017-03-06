@@ -64,7 +64,7 @@ public class KnightBoard{
 		return true;
 	    }
 	    try{
-		if (solveH(r + 1, c + 2, level + 1)){
+		if (solveH(r + 2, c - 1, level + 1)){
 		    return true;
 		}
 	    } catch (ArrayIndexOutOfBoundsException e) {}
@@ -74,17 +74,7 @@ public class KnightBoard{
 		}
 	    } catch (ArrayIndexOutOfBoundsException e) {}
 	    try{
-		if (solveH(r + 2, c + 1, level + 1)){
-		    return true;
-		}
-	    } catch (ArrayIndexOutOfBoundsException e) {}
-	    try{
-		if (solveH(r + 2, c - 1, level + 1)){
-		    return true;
-		}
-	    } catch (ArrayIndexOutOfBoundsException e) {}
-	    try{
-		if (solveH(r - 1, c + 2, level + 1)){
+		if (solveH(r - 2, c - 1, level + 1)){
 		    return true;
 		}
 	    } catch (ArrayIndexOutOfBoundsException e) {}
@@ -94,12 +84,22 @@ public class KnightBoard{
 		}
 	    } catch (ArrayIndexOutOfBoundsException e) {}
 	    try{
+		if (solveH(r + 2, c + 1, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    try{
+		if (solveH(r + 1, c + 2, level + 1)){
+		    return true;
+		}
+	    } catch (ArrayIndexOutOfBoundsException e) {}
+	    try{
 		if (solveH(r - 2, c + 1, level + 1)){
 		    return true;
 		}
 	    } catch (ArrayIndexOutOfBoundsException e) {}
 	    try{
-		if (solveH(r - 2, c - 1, level + 1)){
+		if (solveH(r - 1, c + 2, level + 1)){
 		    return true;
 		}
 	    } catch (ArrayIndexOutOfBoundsException e) {}
@@ -155,21 +155,21 @@ public class KnightBoard{
     // 	return spots;
     //  }
 
-    public static void main(String[] args){
-	KnightBoard two = new KnightBoard(2,2);
-        two.solve();
-        System.out.println(two.toString());
-	KnightBoard five = new KnightBoard(5,5);
-	five.solve();
-        System.out.println(five.toString());
-	KnightBoard six = new KnightBoard(6,6);
-	six.solve();
-        System.out.println(six.toString());
-	KnightBoard seven = new KnightBoard(7,7);
-	seven.solve();
-        System.out.println(seven.toString());
-	KnightBoard eight = new KnightBoard(8,8);
-        eight.solve();
-        System.out.println(eight.toString());
-    }
+    // public static void main(String[] args){
+    // 	KnightBoard two = new KnightBoard(2,2);
+    //     two.solve();
+    //     System.out.println(two.toString());
+    // 	KnightBoard five = new KnightBoard(5,5);
+    // 	five.solve();
+    //     System.out.println(five.toString());
+    // 	KnightBoard six = new KnightBoard(6,6);
+    // 	six.solve();
+    //     System.out.println(six.toString());
+    // 	KnightBoard seven = new KnightBoard(7,7);
+    // 	seven.solve();
+    //     System.out.println(seven.toString());
+    // 	KnightBoard eight = new KnightBoard(8,8);
+    //     eight.solve();
+    //     System.out.println(eight.toString());
+    // }
 }
