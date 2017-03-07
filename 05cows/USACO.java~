@@ -1,0 +1,22 @@
+import java.util.*;
+import.io.*
+
+public class USACO{
+
+    private int[][] lake;
+    private int elevation;
+    private int[][] directions;
+    
+    public USACO(String lak){
+	try{
+	    file directions = new File(lak).useDelimiter(" ");
+	    Scanner dir = new Scanner(directions);
+	    lake = new int[Int.parseInt(dir.next())][Int.parseInt(dir.next())];
+	    elevation = Int.parseInt(dir.next());
+	    directions = new int[Int.parseInt(dir.next())][3];
+	    for (int r = 0; r < lake.length; r++){
+		for (int c = 0; c < lake[0].length; c++){
+		    lake[r][c] = Int.parseInt(dir.next());
+		}
+	    }
+	    
