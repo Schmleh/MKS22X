@@ -41,6 +41,9 @@ public class USACO{
 	return meh;
     }
 
+    private int bronze(){
+	
+
     public static void main(String[] args){
 	for(int i = 1; i < 11; i++){
 	    USACO one = new USACO("makelake." + i + ".in");
