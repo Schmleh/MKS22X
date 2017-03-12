@@ -12,34 +12,32 @@ public class KnightBoard{
 		count ++;
 	    }
 	}
-	if (count == (Board.length * Board[0].length)){
-	    String meh = "";
-	    if (Board.length * Board[0].length < 10){
-		for (int r = 0; r < Board.length; r ++){
-		    for (int c = 0; c < Board[0].length; c++){
-			meh += Board[r][c];
-			meh += " ";
-		    }
-		    meh += "\n";
-		}
-	    }else {
-		for (int r = 0; r < Board.length; r ++){
-		    for (int c = 0; c < Board[0].length; c++){
-			if (Board[r][c] < 10){
-			    meh += " ";
-			}
-			meh += Board[r][c];
-			meh += " ";
-		    }
-		    meh += "\n";
-		}
-	    }
-	    return meh;
-	}else {
+	if (count != (Board.length * Board[0].length)){
 	    return "";
 	}
+	String meh = "";
+	if (Board.length * Board[0].length < 10){
+	    for (int r = 0; r < Board.length; r ++){
+		for (int c = 0; c < Board[0].length; c++){
+		    meh += Board[r][c];
+		    meh += " ";
+		}
+		meh += "\n";
+	    }
+	}else {
+	    for (int r = 0; r < Board.length; r ++){
+		for (int c = 0; c < Board[0].length; c++){
+		    if (Board[r][c] < 10){
+			meh += " ";
+		    }
+		    meh += Board[r][c];
+		    meh += " ";
+		}
+		meh += "\n";
+	    }
+	}
+	return meh;
     }
-    //blank if you never called solve or when there is no solution
 
     public void solve() {
 	for (int r = 0; r < Board.length; r ++){
@@ -110,7 +108,7 @@ public class KnightBoard{
     }
     // level is the # of the knight
 
-    // public int[] findZeroes(int row, int col){
+    //public int[] findZeroes(int row, int col){
     // 	int[] spots = new int[8];
     // 	try{
     // 	    spots[0] =  Board[row + 1][col + 2];
@@ -155,19 +153,19 @@ public class KnightBoard{
     // 	return spots;
     //  }
 
-    // public static void main(String[] args){
-    // 	KnightBoard two = new KnightBoard(2,2);
-    //     two.solve();
-    //     System.out.println(two.toString());
-    // 	KnightBoard five = new KnightBoard(5,5);
+    //public static void main(String[] args){
+    //	KnightBoard two = new KnightBoard(2,2);
+    //   two.solve();
+    //   System.out.println(two.toString());
+    //	KnightBoard five = new KnightBoard(5,5);
     // 	five.solve();
     //     System.out.println(five.toString());
     // 	KnightBoard six = new KnightBoard(6,6);
     // 	six.solve();
     //     System.out.println(six.toString());
     // 	KnightBoard seven = new KnightBoard(7,7);
-    // 	seven.solve();
-    //     System.out.println(seven.toString());
+    //	seven.solve();
+    //    System.out.println(seven.toString());
     // 	KnightBoard eight = new KnightBoard(8,8);
     //     eight.solve();
     //     System.out.println(eight.toString());

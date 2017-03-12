@@ -3,17 +3,15 @@ import java.io.*;
 
 public class USACO{
 
-    private int[][] lake;
-    private int elevation;
-    private int[][] directions;
-    
-    public USACO(String lak){
+    public USACO(){}
+
+    public static int bronze(String lak){
 	try{
 	    File direction = new File(lak);
 	    Scanner dir = new Scanner(direction);
-	    lake = new int[dir.nextInt()][dir.nextInt()];
-	    elevation = dir.nextInt();
-	    directions = new int[dir.nextInt()][3];
+	    int[][] lake = new int[dir.nextInt()][dir.nextInt()];
+	    int elevation = dir.nextInt();
+	    int[][] directions = new int[dir.nextInt()][3];
 	    for (int r = 0; r < lake.length; r++){
 		for (int c = 0; c < lake[0].length; c++){
 		    lake[r][c] = dir.nextInt();
@@ -24,24 +22,14 @@ public class USACO{
 		    directions[r][c] = dir.nextInt();
 		}
 	    }
+	    return bronzeh(directions, elevation, lake);
 	}catch (FileNotFoundException e){
 	    System.out.println("File not found");
+	    return -1;
 	}
     }
 
-    public String toString(){
-	String meh = "";
-	for (int r = 0; r < lake.length; r++){
-	    for (int c = 0; c < lake[0].length; c++){
-		meh += lake[r][c];
-		meh += " ";
-	    }
-	    meh += "\n";
-	}
-	return meh;
-    }
-
-    private int highest(int row, int col){
+    public static int highest(int row, int col, int[][] lake){
 	int current = 0;
 	for(int r = 0; r < 3; r++){
 	    for(int c = 0; c < 3; c++){
@@ -53,10 +41,10 @@ public class USACO{
 	return current;
     }
     
-    private int bronze(){
+    public static int bronzeh(int[][] directions, int elevation, int[][] lake){
 	for(int n = 0; n < directions.length; n++){
 	    for(int t = 0; t < directions[n][2]; t++){
-		int highest = highest(directions[n][0] - 1, directions[n][1] - 1);
+		int highest = highest(directions[n][0] - 1, directions[n][1] - 1, lake);
 		for(int r = 0; r < 3; r++){
 		    for(int c = 0; c < 3; c++){
 			if (lake[directions[n][0] - 1 + r][directions[n][1] - 1 + c] == highest){
@@ -79,10 +67,68 @@ public class USACO{
 	return vol * 5184;
     }
 
+    public static void anf(int row, int col, int[][] now, int[][] soon){
+	int nex = 0;
+	if (row + 1 < now.length && (now[row + 1][col] != -1)){
+	    nex += now[row + 1][col];
+	}
+	if (row - 1 >= 0 && (now[row - 1][col] != -1)){
+	    nex += now[row - 1][col];
+	}
+	if (col + 1 < now[0].length && (now[row][col + 1] != -1)){
+	    nex += now[row][col + 1];
+	}
+	if (col - 1 >= 0 && (now[row][col - 1] != -1)){
+	    nex += now[row][col - 1];
+	}
+	soon[row][col] = nex;
+    }
+    
+    public static int silver(String file){
+	try{
+	    File direction = new File(file);
+	    Scanner dir = new Scanner(direction);
+	    int[][] now = new int[dir.nextInt()][dir.nextInt()];
+	    int time = dir.nextInt();
+	    int[][] soon = new int[now.length][now[0].length];
+	    String line = "";
+	    for (int r = 0; r < now.length; r++){
+		line = dir.next();
+		for (int c = 0; c < now[0].length; c++){
+		    if(line.charAt(c) == '*'){
+			now[r][c] = -1;
+			soon[r][c] = -1;
+		    }
+		}
+	    }
+	    now[dir.nextInt() - 1][dir.nextInt() - 1] = 1;
+	    int gx = dir.nextInt() - 1;
+	    int gy = dir.nextInt() - 1;
+	    while (time > 0){
+		for (int r = 0; r < now.length; r++){
+		    for (int c = 0; c < now[0].length; c++){
+			if (now[r][c] != -1){
+			    anf(r, c, now, soon);
+			}
+		    }
+		}
+		for (int r = 0; r < now.length; r++){
+		    for (int c = 0; c < now[0].length; c++){
+			now[r][c] = soon[r][c];
+		    }
+		}
+		time --;
+	    }
+	    return now[gx][gy];	    
+	}catch (FileNotFoundException e){
+	    System.out.println("File not found");
+	    return -1;
+	}
+    }
+    
     public static void main(String[] args){
 	for(int i = 1; i < 11; i++){
-	    USACO one = new USACO("makelake." + i + ".in");
-	    System.out.println(one.bronze());
+	    System.out.println(USACO.silver("ctravel." + i + ".in"));
 	}
     }
 }
