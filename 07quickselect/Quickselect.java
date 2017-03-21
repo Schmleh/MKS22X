@@ -1,3 +1,4 @@
+import java.io.*;
 public class Quickselect{
 
     public static int partition(int[] nums, int start, int end){
@@ -29,31 +30,40 @@ public class Quickselect{
 	for (int j = 0; j < nums.length; j ++){
 	    nums[j] = two[j];
 	}
-	 for ( int j: nums){
-	     System.out.print(j + " ");
-	 }
-	 System.out.print("\n");
-	 System.out.println("Final Index: " + s);
+	 // for ( int j: nums){
+	 //     System.out.print(j + " ");
+	 // }
+	 // System.out.print("\n");
+	 // System.out.println("Final Index: " + s);
 	 return s;
     }
     
     public static int quickFind(int[] nums, int pos){
-     	int start = 0;
-     	int end = nums.length;
-     	int found = -100;
-     	while( found != pos){
-	    System.out.println("Start: " + start);
-	    System.out.println("End: " + end);
-     	    found = partition(nums, start, end);
-     	    if (found > pos){
-     		end = found - 1;
-     	    }
-     	    if (found < pos){
-     		start = found + 1;
-     	    }
-	    System.out.println("");
-    	}
-    	return nums[found];
+	if (!(pos < 0 || pos >= nums.length)){
+	    int start = 0;
+	    int end = nums.length;
+	    int found = -100;
+	    while( found != pos){
+		//System.out.println("Start: " + start);
+		//System.out.println("End: " + end);
+		found = partition(nums, start, end);
+		if (found > pos){
+		    end = found;
+		}
+		if (found < pos){
+		    start = found + 1;
+		}
+		//System.out.println("");
+	    }
+	    return nums[found];
+	} else{
+	    try{
+		throw new IllegalArgumentException();
+	    } catch (IllegalArgumentException e){
+		System.out.println("You can't get a number at that index in this array.");
+		throw e;
+	    }
+	}
     }
 
     public static void swap(int[] ary, int one, int two){
@@ -103,4 +113,12 @@ public class Quickselect{
 	    System.out.print(num[i] + " ");
 	}
     }
+    // public static void main(String[] args){
+    //  	int[] num = {999,999,999,4,1,0,3,2,999,999,999, -2345, -2, -3 ,0, 8 ,91};
+    //  	System.out.println(quickFind(num, -1));
+    // 	System.out.println(quickFind(num, 4));
+    // 	System.out.println(quickFind(num, 6));
+    // 	System.out.println(quickFind(num, 5));
+    // 	System.out.println(quickFind(num, 7));
+    //  }
 }
