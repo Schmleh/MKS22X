@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Merge {
 
     public static void mergesort(int[] ary){
@@ -36,17 +38,30 @@ public class Merge {
 	for (int z = 0; z < c.length; z ++){
 	    ary[z] = c[z];
 	}
-	for(int i = 0; i < c.length; i ++){
-	    System.out.print(c[i] + " ");
-	}
-	System.out.println("\n");
+	// for(int i = 0; i < c.length; i ++){
+	//     System.out.print(c[i] + " ");
+	// }
+	// System.out.println("\n");
     }
 
-    public static void main(String[] args){
-	int[] nums = {1,2,8,3,0,12,2345,74,123,586,32,5,-1,234,-342};
-	mergesort(nums);
-	for(int i = 0; i < nums.length; i ++){
-	    System.out.println(nums[i]);
-	}
-    }
+    //public static void main(String[] args){
+	// int[] nums = {1,2,8,3,0,12,2345,74,123,586,32,5,-1,234,-342};
+	// int[] nums = new int[11000000];
+	// for (int i = 0; i < nums.length; i++){
+	//     nums[i] = (int)(Math.random() * 100) * (int)(Math.random() * 100);
+	// }
+	// int[] sorted= nums.clone();
+	// Arrays.sort(sorted);
+	// mergesort(nums);
+	// for (int i = 1; i < nums.length; i++){
+	//     if (nums[i] < nums [i --]){
+	// 	System.out.println("false");
+	//     }
+	// }
+	// System.out.println("true");
+	// for(int i = 0; i < nums.length; i ++){
+	//     System.out.print(nums[i] + " ");
+	// }
+	// System.out.println(Arrays.equals(sorted, nums));
+    //}
 }
