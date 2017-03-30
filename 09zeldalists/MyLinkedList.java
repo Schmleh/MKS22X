@@ -4,18 +4,25 @@ public class MyLinkedList{
 
 	private int value;
 	private LNode next;
+	private LNode prev;
 	// private Node previous;
 	
 	private LNode(int number){
 	    value = number;
 	    next = null;
-	    // previous = null;
+	    prev = null;
 	}
 
 	private LNode(int number, LNode node){
 	    value = number;
 	    next = node;
-	    // previous = null;
+	    prev = null;
+	}
+	
+	private LNode(LNode node, int number){
+	    value = number;
+	    next = null;
+	    prev = node;
 	}
 	
     }
@@ -69,8 +76,51 @@ public class MyLinkedList{
         int c = index;
 	while (c >= 0 && (temmp != null)){
 	    temmp = temmp.next;
+	    c --;
 	}
 	return temmp.value;
     }
+
+    public int set(int index, int nummber){
+	if(index >= size()){
+	    throw new IndexOutOfBoundsException();
+	}
+        LNode temmp = start;
+        int c = index;
+	while (c >= 0 && (temmp != null)){
+	    temmp = temmp.next;
+	    c --;
+	}
+	int ret = temmp.value;
+	temmp.value = nummber;
+	return ret;
+    }
+
+    public int indexOf(int number){
+	if(index >= size()){
+	    throw new IndexOutOfBoundsException();
+	}
+        LNode temmp = start;
+        int c = 0;
+	while (temmp != null){
+	    if (temmp.value == number){
+		return c;
+	    }
+	    temmp = temmp.next;
+	    c ++;
+	}
+	return -1;
+    }
+
+    public void add(int index, int number){
+	if(index >= size()){
+	    throw new IndexOutOfBoundsException();
+	}
+        LNode temmp = start;
+        int c = index;
+	while (temmp != null){
+	    temmp = temmp.next;
+	    c --;
+	}
 	    
 }
