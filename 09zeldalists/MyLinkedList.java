@@ -1,6 +1,6 @@
 public class MyLinkedList{
 
-    public class Lnode{
+    private class Lnode{
 
 	private int value;
 	private Lnode next, prev;
@@ -141,10 +141,10 @@ public class MyLinkedList{
     // }
 
     public void add(int index, int number){
-	Lnode meh = getNode(index);
 	if (index == 0){
-	    addBefore(number, meh);
+	    addBefore(number, start);
 	} else {
+	    Lnode meh = getNode(index - 1);
 	    addAfter(number, meh);
 	}
     }	    
@@ -168,6 +168,9 @@ public class MyLinkedList{
     private Lnode getNode(int index){
 	if(index >= size()){
      	    throw new IndexOutOfBoundsException();
+     	}
+	if(index < 0){
+	    throw new IndexOutOfBoundsException();
      	}
 	if(index < size / 2){
 	    Lnode temmp = start;
@@ -228,6 +231,18 @@ public class MyLinkedList{
 	    meh.next.prev = meh.prev;
 	}
 	size --;
+    }
+
+    public static void main(String[] args){
+	MyLinkedList one = new MyLinkedList();
+	one.add(0, 5);
+	one.add(1, 4);
+	one.add(2, 3);
+	one.add(3, 2);
+	one.add(4, 1);
+	one.add(5, 1);
+	one.remove(0);
+	System.out.println(one.toString());
     }
     
 }
