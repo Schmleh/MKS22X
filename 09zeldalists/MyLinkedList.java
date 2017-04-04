@@ -24,10 +24,16 @@ public class MyLinkedList{
 	    next = null;
 	    prev = node;
 	}
+
+	private LNode(LNode node, int number, Lnode noded){
+	    value = number;
+	    next = noded;
+	    prev = node;
+	}
 	
     }
     
-    private LNode start;
+    private LNode start, end;
     private int size;
     
     public MyLinkedList(){
@@ -37,6 +43,7 @@ public class MyLinkedList{
     
     public MyLinkedList(LNode node){
     	LNode start = node;
+	Lnode end = node;
         int s = 0;
         LNode temmp = node;
     	while (temmp != null){
@@ -48,6 +55,7 @@ public class MyLinkedList{
 
     public boolean add (int number){
 	LNode Front = new LNode(number, start);
+	start.prev = Front;
 	start = Front;
 	size ++;
 	return true;
@@ -64,7 +72,7 @@ public class MyLinkedList{
      	    s += temmp.value + ", ";
      	    temmp = temmp.next;
      	}
-	s += " ]";
+	s += "]";
 	return s;
     }
 
@@ -118,9 +126,32 @@ public class MyLinkedList{
 	}
         LNode temmp = start;
         int c = index;
-	while (temmp != null){
+	while ((temmp != null) && (c > 1)){
 	    temmp = temmp.next;
 	    c --;
 	}
-	    
+	Lnode adin = new Lnode(temmp, number, temmp.next);
+	temmp.next.prev = adin;
+	temmp.next = adin;
+	size ++;
+    }
+
+    public int remove(int index){
+	if(index >= size()){
+	    throw new IndexOutOfBoundsException();
+	}
+        LNode temmp = start;
+        int c = index;
+	while ((temmp != null) && (c > 0)){
+	    temmp = temmp.next;
+	    c --;
+	}
+	temmp.next.prev = temmp.prev;
+	temmp.prev.next = temmp.next;
+	size --;
+	return temmp.value;
+    }
+
+
+
 }
