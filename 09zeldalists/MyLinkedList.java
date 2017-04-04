@@ -1,31 +1,30 @@
 public class MyLinkedList{
 
-    public class LNode{
+    public class Lnode{
 
 	private int value;
-	private LNode next;
-	private LNode prev;
+	private Lnode next, prev;
 	// private Node previous;
 	
-	private LNode(int number){
+	private Lnode(int number){
 	    value = number;
 	    next = null;
 	    prev = null;
 	}
 
-	private LNode(int number, LNode node){
+	private Lnode(int number, Lnode node){
 	    value = number;
 	    next = node;
 	    prev = null;
 	}
 	
-	private LNode(LNode node, int number){
+	private Lnode(Lnode node, int number){
 	    value = number;
 	    next = null;
 	    prev = node;
 	}
 
-	private LNode(LNode node, int number, Lnode noded){
+	private Lnode(Lnode node, int number, Lnode noded){
 	    value = number;
 	    next = noded;
 	    prev = node;
@@ -33,19 +32,19 @@ public class MyLinkedList{
 	
     }
     
-    private LNode start, end;
+    private Lnode start, end;
     private int size;
     
     public MyLinkedList(){
-	LNode start = null;
+	Lnode start = null;
 	int size = 0;
     }
     
-    public MyLinkedList(LNode node){
-    	LNode start = node;
+    public MyLinkedList(Lnode node){
+    	Lnode start = node;
 	Lnode end = node;
         int s = 0;
-        LNode temmp = node;
+        Lnode temmp = node;
     	while (temmp != null){
      	    s ++;
      	    temmp = temmp.next;
@@ -53,11 +52,8 @@ public class MyLinkedList{
      	size = s;
     }
 
-    public boolean add (int number){
-	LNode Front = new LNode(number, start);
-	start.prev = Front;
-	start = Front;
-	size ++;
+    public boolean addFirst (int number){
+        addBefore(number, start);
 	return true;
     }
 
@@ -67,7 +63,7 @@ public class MyLinkedList{
 
     public String toString(){
 	String s = "[";
-        LNode temmp = start;
+        Lnode temmp = start;
     	while (temmp != null){
      	    s += temmp.value + ", ";
      	    temmp = temmp.next;
@@ -76,39 +72,47 @@ public class MyLinkedList{
 	return s;
     }
 
+    // public int get(int index){
+    // 	if(index >= size()){
+    // 	    throw new IndexOutOfBoundsException();
+    // 	}
+    //     LNode temmp = start;
+    //     int c = index;
+    // 	while (c >= 0 && (temmp != null)){
+    // 	    temmp = temmp.next;
+    // 	    c --;
+    // 	}
+    // 	return temmp.value;
+    // }
+
     public int get(int index){
-	if(index >= size()){
-	    throw new IndexOutOfBoundsException();
-	}
-        LNode temmp = start;
-        int c = index;
-	while (c >= 0 && (temmp != null)){
-	    temmp = temmp.next;
-	    c --;
-	}
-	return temmp.value;
+	return getNode(index).value;
     }
 
+    // public int set(int index, int nummber){
+    // 	if(index >= size()){
+    // 	    throw new IndexOutOfBoundsException();
+    // 	}
+    //     LNode temmp = start;
+    //     int c = index;
+    // 	while (c >= 0 && (temmp != null)){
+    // 	    temmp = temmp.next;
+    // 	    c --;
+    // 	}
+    // 	int ret = temmp.value;
+    // 	temmp.value = nummber;
+    // 	return ret;
+    // }
+
     public int set(int index, int nummber){
-	if(index >= size()){
-	    throw new IndexOutOfBoundsException();
-	}
-        LNode temmp = start;
-        int c = index;
-	while (c >= 0 && (temmp != null)){
-	    temmp = temmp.next;
-	    c --;
-	}
-	int ret = temmp.value;
-	temmp.value = nummber;
-	return ret;
+	Lnode meh = getNode(index);
+	int namber = meh.value;
+	meh.value = nummber;
+	return namber;
     }
 
     public int indexOf(int number){
-	if(index >= size()){
-	    throw new IndexOutOfBoundsException();
-	}
-        LNode temmp = start;
+        Lnode temmp = start;
         int c = 0;
 	while (temmp != null){
 	    if (temmp.value == number){
@@ -120,38 +124,111 @@ public class MyLinkedList{
 	return -1;
     }
 
+    // public void add(int index, int number){
+    // 	if(index >= size()){
+    // 	    throw new IndexOutOfBoundsException();
+    // 	}
+    //     LNode temmp = start;
+    //     int c = index;
+    // 	while ((temmp != null) && (c > 1)){
+    // 	    temmp = temmp.next;
+    // 	    c --;
+    // 	}
+    // 	Lnode adin = new Lnode(temmp, number, temmp.next);
+    // 	temmp.next.prev = adin;
+    // 	temmp.next = adin;
+    // 	size ++;
+    // }
+
     public void add(int index, int number){
+	Lnode meh = getNode(index);
+	if (index == 0){
+	    addBefore(number, meh);
+	} else {
+	    addAfter(number, meh);
+	}
+    }	    
+
+    // public int remove(int index){
+    // 	if(index >= size()){
+    // 	    throw new IndexOutOfBoundsException();
+    // 	}
+    //     LNode temmp = start;
+    //     int c = index;
+    // 	while ((temmp != null) && (c > 0)){
+    // 	    temmp = temmp.next;
+    // 	    c --;
+    // 	}
+    // 	temmp.next.prev = temmp.prev;
+    // 	temmp.prev.next = temmp.next;
+    // 	size --;
+    // 	return temmp.value;
+    // }
+
+    private Lnode getNode(int index){
 	if(index >= size()){
-	    throw new IndexOutOfBoundsException();
+     	    throw new IndexOutOfBoundsException();
+     	}
+	if(index < size / 2){
+	    Lnode temmp = start;
+	    int c = index;
+	    while ((temmp != null) && (c > 0)){
+		temmp = temmp.next;
+		c --;
+	    }
+	    return temmp;
+	} else {
+	    Lnode temmp = end;
+	    int c = index;
+	    while ((temmp != null) && (c > 0)){
+		temmp = temmp.prev;
+		c --;
+	    }
+	    return temmp;
 	}
-        LNode temmp = start;
-        int c = index;
-	while ((temmp != null) && (c > 1)){
-	    temmp = temmp.next;
-	    c --;
+    }
+
+
+    private void addBefore(int value, Lnode meh){
+	if (meh.prev == null){
+	    Lnode newone = new Lnode(value, meh);
+	    meh.prev = newone;
+	    start = newone;
+	} else {
+	    Lnode newone = new Lnode(meh.prev, value, meh);
+	    meh.prev.next = newone;
+	    meh.prev = newone;
 	}
-	Lnode adin = new Lnode(temmp, number, temmp.next);
-	temmp.next.prev = adin;
-	temmp.next = adin;
 	size ++;
     }
 
-    public int remove(int index){
-	if(index >= size()){
-	    throw new IndexOutOfBoundsException();
+    private void addAfter(int value, Lnode meh){
+	if (meh.next == null){
+	    Lnode newone = new Lnode(meh, value);
+	    meh.next = newone;
+	    start = newone;
+	} else {
+	    Lnode newone = new Lnode(meh, value, meh.next);
+	    meh.next.prev = newone;
+	    meh.next = newone;
 	}
-        LNode temmp = start;
-        int c = index;
-	while ((temmp != null) && (c > 0)){
-	    temmp = temmp.next;
-	    c --;
-	}
-	temmp.next.prev = temmp.prev;
-	temmp.prev.next = temmp.next;
-	size --;
-	return temmp.value;
+	size ++;
     }
 
-
-
+    public void remove(int index){
+	Lnode meh = getNode(index);
+	if (meh.prev == null){
+	    meh.next.prev = null;
+	    start = meh.next;
+	} else if (meh.next == null){
+	    meh.prev.next = null;
+	    end = meh.prev;
+	} else {
+	    meh.prev.next = meh.next;
+	    meh.next.prev = meh.prev;
+	}
+	size --;
+    }
+    
 }
+
