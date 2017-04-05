@@ -2,36 +2,36 @@ public class MyLinkedList{
 
     private class Lnode{
 
-	private int value;
-	private Lnode next, prev;
+	int value;
+        Lnode next, prev;
 	// private Node previous;
 	
-	private Lnode(int number){
+	public Lnode(int number){
 	    value = number;
 	    next = null;
 	    prev = null;
 	}
 
-	private Lnode(int number, Lnode node){
+	public Lnode(int number, Lnode node){
 	    value = number;
 	    next = node;
 	    prev = null;
 	}
 	
-	private Lnode(Lnode node, int number){
+	public Lnode(Lnode node, int number){
 	    value = number;
 	    next = null;
 	    prev = node;
 	}
 
-	private Lnode(Lnode node, int number, Lnode noded){
+	public Lnode(Lnode node, int number, Lnode noded){
 	    value = number;
 	    next = noded;
 	    prev = node;
 	}
 	
     }
-    
+
     private Lnode start, end;
     private int size;
     
@@ -182,7 +182,7 @@ public class MyLinkedList{
 	    return temmp;
 	} else {
 	    Lnode temmp = end;
-	    int c = index;
+	    int c = size - index;
 	    while ((temmp != null) && (c > 0)){
 		temmp = temmp.prev;
 		c --;
@@ -193,14 +193,20 @@ public class MyLinkedList{
 
 
     private void addBefore(int value, Lnode meh){
-	if (meh.prev == null){
-	    Lnode newone = new Lnode(value, meh);
-	    meh.prev = newone;
+	if (meh == null){
+	    Lnode newone = new Lnode(value);
 	    start = newone;
+	    end = newone;
 	} else {
-	    Lnode newone = new Lnode(meh.prev, value, meh);
-	    meh.prev.next = newone;
-	    meh.prev = newone;
+	    if (meh.prev == null){
+		Lnode newone = new Lnode(value, meh);
+		meh.prev = newone;
+		start = newone;
+	    } else {
+		Lnode newone = new Lnode(meh.prev, value, meh);
+		meh.prev.next = newone;
+		meh.prev = newone;
+	    }
 	}
 	size ++;
     }
