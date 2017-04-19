@@ -33,35 +33,6 @@ public class MyLinkedList implements Iterator<MyLinkedList>, Iterable<MyLinkedLi
 	
     }
 
-    public boolean removeNext = false;
-    
-    public boolean hasNext(){
-        return size != 0;
-    }
-    
-    public MyLinkedList next(){
-	if (hasNext()){
-	    removeNext = true;
-	    return new MyLinkedList(start);
-	} else {
-	    throw new NoSuchElementException();
-	}
-    }
-    
-    public void remove(){
-	if (removeNext){
-	    removeNext = false;
-	    start = start.next;
-	    size --;
-	} else {
-	    throw new IllegalStateException();
-	}
-    }
-
-    public Iterator<MyLinkedList> iterator(){
-	return this;
-    }
-
     private Lnode start, end;
     private int size;
     
@@ -297,6 +268,38 @@ public class MyLinkedList implements Iterator<MyLinkedList>, Iterable<MyLinkedLi
 	// System.out.println(one.remove(0));
 	// System.out.println(one.toString());
     }
-    
+
+    public class MyLinkedList implements Iterator<Integer>{
+
+	private LNode first, last; 
+	private MyLinkedList list;
+	private boolean removeNext = false;
+	
+	public Iterator<MyLinkedList> iterator(MyLinkedList dalist){
+	    list = dalist;
+	    first = dalist.start;
+	    last = dalist.end;
+	}
+	
+	public boolean hasNext(){
+	    return first != last;
+	}
+	
+	public MyLinkedList next(){
+	    if (hasNext()){
+		removeNext = true;
+		first = first.next;
+		return first.prev;
+	    } else {
+		throw new NoSuchElementException();
+	    }
+	}
+	
+	public void remove(){
+	    throw new UnsupportedOperationException();
+	}
+	
+    }
+
 }
 
