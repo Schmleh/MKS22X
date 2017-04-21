@@ -1,0 +1,62 @@
+import MyDeque;
+
+public class Fancy{
+
+    public static double evaluate(String m){
+	String[] terms = m.split(" ");
+	values = new MyDeque(terms.length);
+	for (String term : terms){
+	    if (isOp(term)){
+		values.push(apply(term, values.pop(), values.pop()));
+	    } else {
+		values.push(term);
+	    }
+	}
+	return Double.parseDouble(values.pop());
+    }
+
+    public static boolean isOp(String oh){
+	if (oh.equals("+")){
+	    return true;
+	}
+	if (oh.equals("-")){
+	    return true;
+	}
+	if (oh.equals("*")){
+	    return true;
+	}
+	if (oh.equals("/")){
+	    return true;
+	}
+	if (oh.equals("%")){
+	    return true;
+	}
+	return false;
+    }
+
+    public static String apply(String op, String s, String f){
+	if (oh.equals("+")){
+	    return "" + (Double.parseDouble(f) + Double.parseDouble(s));
+	}
+	if (oh.equals("-")){
+	    return "" + (Double.parseDouble(f) - Double.parseDouble(s));
+	}
+	if (oh.equals("*")){
+	    return "" + (Double.parseDouble(f) * Double.parseDouble(s));
+	}
+	if (oh.equals("/")){
+	    return "" + (Double.parseDouble(f) / Double.parseDouble(s));
+	}
+	else {
+	    return "" + (Double.parseDouble(f) % Double.parseDouble(s));
+	}
+    }
+
+    public static void main(String[] args){
+	System.out.println(evaluate("2 3 -"));
+	System.out.println(evaluate("4 5 % 7 +"));
+	System.out.println(evaluate("0 1 2 3 * + +"));
+	System.out.println(evaluate("1 2 * 6 9 4 / * -"));
+    }
+    
+}

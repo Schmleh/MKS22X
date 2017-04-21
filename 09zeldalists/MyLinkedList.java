@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class MyLinkedList implements Iterator<MyLinkedList>, Iterable<MyLinkedList>{
+public class MyLinkedList implements Iterable<Integer>{
 
     private class Lnode{
 
@@ -30,6 +30,10 @@ public class MyLinkedList implements Iterator<MyLinkedList>, Iterable<MyLinkedLi
 	    next = noded;
 	    prev = node;
 	}
+
+	public Lnode nextOne(){
+	    return next;
+	}
 	
     }
 
@@ -53,6 +57,14 @@ public class MyLinkedList implements Iterator<MyLinkedList>, Iterable<MyLinkedLi
      	size = s;
     }
 
+    public Iterator<Integer> iterator(){
+	return new LinkedIterator();
+    }
+
+    public Lnode getStart(){
+	return start;
+    }
+    
     public boolean add(int number){
 	if (size == 0){
 	    Lnode meh = new Lnode (number);
@@ -214,23 +226,23 @@ public class MyLinkedList implements Iterator<MyLinkedList>, Iterable<MyLinkedLi
 	size --;
     }
     
-    public static void main(String[] args){
-	// MyLinkedList one = new MyLinkedList();
-	// one.add(5);
+    //public static void main(String[] args){
+	//MyLinkedList one = new MyLinkedList();
+	//one.add(5);
+	//System.out.println(one.toString());
+	//one.add(4);
 	// System.out.println(one.toString());
-	// one.add(4);
+	//one.add(3);
 	// System.out.println(one.toString());
-	// one.add(3);
+	//one.add(1,2);
 	// System.out.println(one.toString());
-	// one.add(1,2);
+	//one.add(2,1);
 	// System.out.println(one.toString());
-	// one.add(2,1);
+	//one.add(0,0);
 	// System.out.println(one.toString());
-	// one.add(0,0);
+	//one.addFirst(6);
 	// System.out.println(one.toString());
-	// one.addFirst(6);
-	// System.out.println(one.toString());
-	// one.addFirst(7);
+	//one.addFirst(7);
 	// System.out.println(one.toString());
 	// System.out.println(one.get(0));
 	// System.out.println(one.get(1));
@@ -267,32 +279,29 @@ public class MyLinkedList implements Iterator<MyLinkedList>, Iterable<MyLinkedLi
 	// System.out.println(one.toString());
 	// System.out.println(one.remove(0));
 	// System.out.println(one.toString());
-    }
+        // Iterator two = one.iterator();
+	// while (two.hasNext()){
+	//     System.out.println(two.next());
+	// }
+    //}
 
-    public class MyLinkedList implements Iterator<Integer>{
+    class LinkedIterator implements Iterator<Integer>{
 
-	private LNode first, last; 
-	private MyLinkedList list;
-	private boolean removeNext = false;
+        Lnode first; 
+        MyLinkedList list;
 	
-	public Iterator<MyLinkedList> iterator(MyLinkedList dalist){
-	    list = dalist;
-	    first = dalist.start;
-	    last = dalist.end;
+	public LinkedIterator(){
+	    first = getStart();
 	}
 	
 	public boolean hasNext(){
-	    return first != last;
+	    return (first != null);
 	}
 	
-	public MyLinkedList next(){
-	    if (hasNext()){
-		removeNext = true;
-		first = first.next;
-		return first.prev;
-	    } else {
-		throw new NoSuchElementException();
-	    }
+	public Integer next(){
+	    Lnode ret = first;
+	    first = first.nextOne();
+	    return ret.value;
 	}
 	
 	public void remove(){
