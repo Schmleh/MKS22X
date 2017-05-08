@@ -9,6 +9,8 @@ public class MyHeap{
     public MyHeap(){
 	max = true;
 	woahdude = 1;
+	heep = new ArrayList<String>(1);
+	heep.add("");
     }
 
     public MyHeap(boolean dank){
@@ -19,7 +21,7 @@ public class MyHeap{
 	    woahdude = -1;
 	}
 	heep = new ArrayList<String>(1);
-	heep.add(null);
+	heep.add("");
     }
 
     public void add(String s){
@@ -54,13 +56,15 @@ public class MyHeap{
     }
 
     public void pushDown(int place){
-	if (place != heep.size()){
+	if (place * 2 <= heep.size()){
 	    if (heep.get(place).compareTo(heep.get(place * 2)) * woahdude  < 0){
 		String temmp = heep.get(place);
 		heep.set(place, heep.get(place * 2));
 		heep.set(place * 2, temmp);
 		pushDown(place * 2);
-	    } else if (heep.get(place).compareTo(heep.get(place * 2 + 1)) * woahdude < 0){
+	    }
+	} else if (place * 2 <= heep.size() + 1){
+	    if (heep.get(place).compareTo(heep.get(place * 2 + 1)) * woahdude < 0){
 		String temmp = heep.get(place);
 		heep.set(place, heep.get(place * 2 + 1));
 		heep.set(place * 2 + 1, temmp);
