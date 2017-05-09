@@ -10,7 +10,7 @@ public class MyHeap{
 	max = true;
 	woahdude = 1;
 	heep = new ArrayList<String>(1);
-	heep.add("");
+	heep.add(null);
     }
 
     public MyHeap(boolean dank){
@@ -21,12 +21,12 @@ public class MyHeap{
 	    woahdude = -1;
 	}
 	heep = new ArrayList<String>(1);
-	heep.add("");
+	heep.add(null);
     }
 
     public void add(String s){
 	heep.add(s);
-	pushUp(heep.size());
+	pushUp(heep.size() - 1);
     }
 
     public String remove(){
@@ -75,7 +75,7 @@ public class MyHeap{
 
     public String toString(){
 	String ret = "";
-	for (int i = 1; i <= heep.size(); i ++){
+	for (int i = 1; i < heep.size() - 1; i ++){
 	    ret += heep.get(i) + " ";
 	}
 	return ret;
@@ -89,6 +89,6 @@ public class MyHeap{
 	hey.add("kind of");
 	hey.add("sometimes");
 	hey.add("never");
-	hey.toString();
+	System.out.println(hey.toString());
     }
 }
