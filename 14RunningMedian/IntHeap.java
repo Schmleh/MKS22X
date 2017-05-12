@@ -49,7 +49,7 @@ public class IntHeap{
 	    if ((place / 2) * 2 + 1 < heep.size()){
 		int left = (place / 2) * 2;
 		int right = (place / 2) * 2 + 1;
-		if (heep.get(left) > heep.get(right)){
+		if (heep.get(left) * woahdude > heep.get(right) * woahdude){
 		    if (heep.get(left).compareTo(heep.get(place / 2)) * woahdude > 0){
 			Integer temmp = heep.get(left);
 			heep.set(left, heep.get(place / 2));
@@ -78,7 +78,7 @@ public class IntHeap{
 	    if (heep.get(place).compareTo(heep.get(place * 2 + 1)) * woahdude < 0){
 		Integer temmp = heep.get(place);
 		int question = 1;
-		if ((heep.get(place * 2)) > (heep.get(place * 2 + 1))){
+		if ((heep.get(place * 2)) * woahdude > (heep.get(place * 2 + 1)) * woahdude){
 		    question = 0;
 		}
 		heep.set(place, heep.get(place * 2 + question));
@@ -110,31 +110,31 @@ public class IntHeap{
 	    
     
     // public static void main(String[] args){
-    //     IntHeap hey = new IntHeap();
-    //     hey.add(127);
+    // 	IntHeap hey = new IntHeap(false);
+    // 	hey.add(127);
+    //  	System.out.println(hey.toString());
+    //  	hey.add(244);
+    //  	System.out.println(hey.toString());
+    //  	hey.add(132);
+    //  	System.out.println(hey.toString());
+    //  	hey.add(480);
+    //  	System.out.println(hey.toString());
+    //  	hey.add(35);
+    //  	System.out.println(hey.toString());
+    //  	hey.add(412);
     // 	System.out.println(hey.toString());
-    // 	hey.add(244);
-    // 	System.out.println(hey.toString());
-    // 	hey.add(132);
-    // 	System.out.println(hey.toString());
-    // 	hey.add(480);
-    // 	System.out.println(hey.toString());
-    // 	hey.add(35);
-    // 	System.out.println(hey.toString());
-    // 	hey.add(412);
-    // 	System.out.println(hey.toString());
-    // 	hey.add(43770);
-    // 	System.out.println(hey.toString());
+    //  	hey.add(43770);
+    //  	System.out.println(hey.toString());
     // 	hey.add(67);
     // 	System.out.println(hey.toString());
-    // 	hey.add(81);
-    // 	System.out.println(hey.toString());
-    // 	hey.remove();
-    // 	System.out.println(hey.toString());
-    // 	hey.remove();	
-    // 	System.out.println(hey.toString());
-    // 	hey.remove();
-    // 	System.out.println(hey.toString());
+    //  	hey.add(81);
+    //  	System.out.println(hey.toString());
+    //  	hey.remove();
+    //  	System.out.println(hey.toString());
+    //  	hey.remove();	
+    //  	System.out.println(hey.toString());
+    //  	hey.remove();
+    //  	System.out.println(hey.toString());
 	
-    // }
+    //  }
 }

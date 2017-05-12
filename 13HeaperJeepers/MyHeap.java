@@ -108,14 +108,4 @@ public class MyHeap{
 	return ret;
     }
 	    
-    
-    public static void main(String[] args){
-	MyHeap hey = new MyHeap();
-        hey.add("point");
-	hey.add("from");
-	hey.add("kind of");
-	hey.add("sometimes");
-	hey.add("never");
-	System.out.println(hey.toString());
-    }
 }
