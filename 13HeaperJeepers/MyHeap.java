@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class MyHeap{
 
@@ -36,7 +36,7 @@ public class MyHeap{
 	    pushDown(1);
 	    return val;
 	} else {
-	    return "ddie";
+	    throw new NoSuchElementException();
 	}
     }
     
@@ -101,11 +101,28 @@ public class MyHeap{
     }
 
     public String toString(){
-	String ret = "";
+	String ret = "[ ";
 	for (int i = 1; i < heep.size(); i ++){
-	    ret += heep.get(i) + " ";
+	    if (i == heep.size() - 1){
+		ret += heep.get(i) + "]";
+	    } else {
+		ret += heep.get(i) + ", ";
+	    }
 	}
 	return ret;
     }
-	    
+
+    // public static void main(String[] args){
+    // 	MyHeap hey = new MyHeap();
+    // 	hey.add("");
+    // 	hey.add("yaaaas");
+    // 	hey.add("noooo.");
+    // 	hey.add("heyyyy");
+    // 	hey.add("wazzup");
+    // 	hey.add("IMHIGH");
+    // 	System.out.println(hey.toString());
+    // 	System.out.println(hey.remove());
+    // 	System.out.println(hey.toString());
+	
+    // }
 }

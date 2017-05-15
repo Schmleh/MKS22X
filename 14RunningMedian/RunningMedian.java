@@ -20,16 +20,55 @@ public class RunningMedian{
 	    size = 1;
 	} else {
 	    if (number > minus.peek()){
-	        maxus.add(median);
-		maxus.add(number);
+		if (maxus.size() - minus.size() < 2){
+		    maxus.add(median);
+		    maxus.add(number);
+		    median = maxus.remove();
+		} else {
+		    minus.add(median);
+		    minus.add(number);
+		    median = minus.remove();
+		}
+	    } else {
+		if(minus.size() - maxus.size() < 2){
+		    minus.add(median);
+		    minus.add(number);
+		    median = minus.remove;
+		} else {
+		    maxus.add(median);
+		    maxus.add(number);
+		    median = maxus.remove;
+		}
+	    }
+	}
+	size += 1;
+    }
+
+    public int remove(){
+	if(size == 1){
+	    size = 0;
+	    return median;
+	} else {
+	    if (minus.size - maxus.size() => 0){
+		int hold = median;
+		median = minus.remove();
+		size -= 1;
+		return hold;
+	    } else {
+		int hold = median;
 		median = maxus.remove();
-	    }else {
-		minus.add(median);
-		minus.add(number);
-		median = minus.remove;
+		size -= 1;
+		return hold;
 	    }
 	}
     }
-    //fix so that the minus and maxus always stay within a size of each other
+    
+    public int size(){
+	return size;
+    }
+
+    public int peek(){
+	return median;
+    }
     
 }

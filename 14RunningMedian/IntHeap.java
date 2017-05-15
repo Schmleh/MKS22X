@@ -1,12 +1,14 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class IntHeap{
 
     private boolean max;
     private ArrayList<Integer> heep;
     private int woahdude;
+    private int size;
 
     public IntHeap(){
+	size = 0;
 	max = true;
 	woahdude = 1;
 	heep = new ArrayList<Integer>(1);
@@ -14,6 +16,7 @@ public class IntHeap{
     }
 
     public IntHeap(boolean dank){
+	size = 0;
 	max = dank;
 	if (max){
 	    woahdude = 1;
@@ -24,9 +27,14 @@ public class IntHeap{
 	heep.add(null);
     }
 
+    public int size(){
+	return size;
+    }
+
     public void add(Integer s){
 	heep.add(s);
 	pushUp(heep.size() - 1);
+	size += 1;
     }
 
     public Integer remove(){
@@ -34,9 +42,10 @@ public class IntHeap{
 	    Integer val =  heep.remove(1);
 	    heep.add(1,heep.remove(heep.size() - 1));
 	    pushDown(1);
+	    size -= 1;
 	    return val;
 	} else {
-	    return 99999999;
+	    throw new NoSuchElementException();
 	}
     }
     
