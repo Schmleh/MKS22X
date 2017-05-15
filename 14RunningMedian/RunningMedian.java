@@ -1,11 +1,9 @@
-import IntHeap;
-
 public class RunningMedian{
 
-    private int median;
+    private Integer median;
     private IntHeap maxus;
     private IntHeap minus;
-    private int size;
+    private Integer size;
 
     public RunningMedian(){
 	maxus = new IntHeap(false);
@@ -15,29 +13,35 @@ public class RunningMedian{
     }
 
     public void add(int number){
-	if (size =< 0){
+	if (size <= 0){
 	    median = number;
 	    size = 1;
 	} else {
-	    if (number > minus.peek()){
-		if (maxus.size() - minus.size() < 2){
-		    maxus.add(median);
-		    maxus.add(number);
-		    median = maxus.remove();
-		} else {
-		    minus.add(median);
-		    minus.add(number);
-		    median = minus.remove();
-		}
+	    if (minus.size() == 0){
+		minus.add(number);
+		minus.add(median);
+		median = minus.remove();
 	    } else {
-		if(minus.size() - maxus.size() < 2){
-		    minus.add(median);
-		    minus.add(number);
-		    median = minus.remove;
+		if (number > minus.peek()){
+		    if (maxus.size() - minus.size() < 2){
+			maxus.add(median);
+			maxus.add(number);
+			median = maxus.remove();
+		    } else {
+			minus.add(median);
+			minus.add(number);
+			median = minus.remove();
+		    }
 		} else {
-		    maxus.add(median);
-		    maxus.add(number);
-		    median = maxus.remove;
+		    if(minus.size() - maxus.size() < 2){
+			minus.add(median);
+			minus.add(number);
+			median = minus.remove();
+		    } else {
+			maxus.add(median);
+			maxus.add(number);
+			median = maxus.remove();
+		    }
 		}
 	    }
 	}
@@ -49,7 +53,7 @@ public class RunningMedian{
 	    size = 0;
 	    return median;
 	} else {
-	    if (minus.size - maxus.size() => 0){
+	    if (minus.size() - maxus.size() >= 0){
 		int hold = median;
 		median = minus.remove();
 		size -= 1;
@@ -67,8 +71,22 @@ public class RunningMedian{
 	return size;
     }
 
-    public int peek(){
+    public int getMedian(){
 	return median;
     }
+
+    // public static void main(String[] args){
+    //     RunningMedian hey = new RunningMedian();
+    //  	hey.add(127);
+    //   	hey.add(244);
+    //   	hey.add(132);
+    //   	hey.add(480);
+    //   	hey.add(35);
+    //   	hey.add(412);
+    //   	hey.add(43770);
+    //  	hey.add(67);
+    //   	hey.add(81);
+    //     System.out.println(hey.getMedian());
+    // }
     
 }

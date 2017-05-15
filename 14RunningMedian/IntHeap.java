@@ -50,7 +50,11 @@ public class IntHeap{
     }
     
     public Integer peek(){
-	return heep.get(1);
+	if (heep.size() > 1){
+	    return heep.get(1);
+	} else {
+	    throw new NoSuchElementException();
+	}
     }
 
     public void pushUp(int place){
@@ -118,9 +122,9 @@ public class IntHeap{
     }
 	    
     
-    // public static void main(String[] args){
-    // 	IntHeap hey = new IntHeap(false);
-    // 	hey.add(127);
+    public static void main(String[] args){
+     	IntHeap hey = new IntHeap(false);
+     	hey.add(127);
     //  	System.out.println(hey.toString());
     //  	hey.add(244);
     //  	System.out.println(hey.toString());
@@ -139,11 +143,11 @@ public class IntHeap{
     //  	hey.add(81);
     //  	System.out.println(hey.toString());
     //  	hey.remove();
-    //  	System.out.println(hey.toString());
+      	System.out.println(hey.peek());
     //  	hey.remove();	
     //  	System.out.println(hey.toString());
     //  	hey.remove();
     //  	System.out.println(hey.toString());
 	
-    //  }
+      }
 }
