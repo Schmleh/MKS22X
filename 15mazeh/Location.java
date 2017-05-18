@@ -1,4 +1,4 @@
-public class Location{
+public class Location implements Comparable<Location>{
     private Integer row, col, distanceToStart, distanceToEnd, priority;
     Location previous;
     private boolean aStar;
@@ -16,6 +16,16 @@ public class Location{
 	    priority = distToStart;
 	}
     }
+
+    public Location(Integer r, Integer c, Location yes,  Integer distToStart, Integer distToGoal){
+	row = r;
+	col = c;
+	distanceToStart = distToStart;
+	distanceToEnd = distToGoal;
+	previous = yes;
+	aStar = true;
+	priority = distToStart;
+    }
     
     public void setPriority(int newPriority){
 	priority = newPriority;
@@ -25,7 +35,7 @@ public class Location{
 	return priority;
     }
     
-    public Integer compareTo(Location other){
+    public int compareTo(Location other){
 	return priority - other.getPriority();
     }
 }

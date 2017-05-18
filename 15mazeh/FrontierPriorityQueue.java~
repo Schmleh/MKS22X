@@ -1,0 +1,109 @@
+import java.util.*;
+
+public class FrontierPriorityQueue implements Frontier{
+
+    private ArrayList<Locatiton> heep;
+    private int woahdude;
+    private int size;
+    
+    public int size(){
+	return size;
+    }
+
+    public FrontierPriorityQueue(){
+	size = 0;
+	max = true;
+	woahdude = 1;
+	heep = new ArrayList<Location>(1);
+	heep.add(null);
+    }
+
+    public void add(Location s){
+	heep.add(s);
+	pushUp(heep.size() - 1);
+	size += 1;
+    }
+
+    public Location remove(){
+	if (heep.size() > 1){
+	    Location val =  heep.remove(1);
+	    heep.add(1,heep.remove(heep.size() - 1));
+	    pushDown(1);
+	    size -= 1;
+	    return val;
+	} else {
+	    throw new NoSuchElementException();
+	}
+    }
+    
+    public Location peek(){
+	if (heep.size() > 1){
+	    return heep.get(1);
+	} else {
+	    throw new NoSuchElementException();
+	}
+    }
+
+    public void pushUp(int place){
+	if (place != 1){
+	    if ((place / 2) * 2 + 1 < heep.size()){
+		int left = (place / 2) * 2;
+		int right = (place / 2) * 2 + 1;
+		if (heep.get(left) * woahdude > heep.get(right) * woahdude){
+		    if (heep.get(left).compareTo(heep.get(place / 2)) * woahdude > 0){
+			Integer temmp = heep.get(left);
+			heep.set(left, heep.get(place / 2));
+			heep.set(place / 2, temmp);
+			pushUp(place / 2);
+		    }
+		} else if (heep.get(right).compareTo(heep.get(place / 2)) * woahdude > 0){
+		    Integer temmp = heep.get(right);
+		    heep.set(right, heep.get(place / 2));
+		    heep.set(place / 2, temmp);
+		    pushUp(place / 2);
+		}
+	    } else {
+		if (heep.get(place).compareTo(heep.get(place / 2)) * woahdude > 0){
+		    Integer temmp = heep.get(place);
+		    heep.set(place, heep.get(place / 2));
+		    heep.set(place / 2, temmp);
+		    pushUp(place / 2);
+		}
+	    }
+	}
+    }
+
+    public void pushDown(int place){
+        if (place * 2 + 1 < heep.size()){
+	    if (heep.get(place).compareTo(heep.get(place * 2 + 1)) * woahdude < 0){
+		Integer temmp = heep.get(place);
+		int question = 1;
+		if ((heep.get(place * 2)) * woahdude > (heep.get(place * 2 + 1)) * woahdude){
+		    question = 0;
+		}
+		heep.set(place, heep.get(place * 2 + question));
+		heep.set(place * 2 + question, temmp);
+		pushDown(place * 2 + question);
+	    } else if (heep.get(place).compareTo(heep.get(place * 2)) * woahdude  < 0){
+		Integer temmp = heep.get(place);
+		heep.set(place, heep.get(place * 2));
+		heep.set(place * 2, temmp);
+		pushDown(place * 2);
+	    }
+	} else if (place * 2 < heep.size()){
+	    if (heep.get(place).compareTo(heep.get(place * 2)) * woahdude  < 0){
+		Integer temmp = heep.get(place);
+		heep.set(place, heep.get(place * 2));
+		heep.set(place * 2, temmp);
+		pushDown(place * 2);
+	    }
+	}
+    }
+
+    public String toString(){
+	String ret = "";
+	for (int i = 1; i < heep.size(); i ++){
+	    ret += heep.get(i) + " ";
+	}
+	return ret;
+    }
