@@ -29,18 +29,10 @@ public class FrontierPriorityQueue implements Frontier{
 	    size -= 1;
 	    return val;
 	} else {
-	    throw new NoSuchElementException();
+	    return null;
 	}
     }
     
-    public Location peek(){
-	if (heep.size() > 1){
-	    return heep.get(1);
-	} else {
-	    throw new NoSuchElementException();
-	}
-    }
-
     public void pushUp(int place){
 	if (place != 1){
 	    if ((place / 2) * 2 + 1 < heep.size()){

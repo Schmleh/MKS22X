@@ -1,5 +1,5 @@
 public class Location implements Comparable<Location>{
-    private Integer row, col, distanceToStart, distanceToEnd, priority;
+    private Integer row, col, distanceToStart, distanceToEnd;
     Location previous;
     private boolean aStar;
 
@@ -10,32 +10,28 @@ public class Location implements Comparable<Location>{
 	distanceToEnd = distToGoal;
 	previous = yes;
 	aStar = aStarr;
-	if (aStarr){
-	    priority = distToStart + distToGoal;
-	} else {
-	    priority = distToStart;
-	}
-    }
-
-    public Location(Integer r, Integer c, Location yes,  Integer distToStart, Integer distToGoal){
-	row = r;
-	col = c;
-	distanceToStart = distToStart;
-	distanceToEnd = distToGoal;
-	previous = yes;
-	aStar = true;
-	priority = distToStart;
-    }
-    
-    public void setPriority(int newPriority){
-	priority = newPriority;
     }
 
     public Integer getPriority(){
+	Integer priority;
+	if (aStar){
+	    priority = distanceToStart + distanceToEnd;
+	} else {
+	    priority = distanceToStart;
+	}
 	return priority;
     }
     
     public int compareTo(Location other){
-	return priority - other.getPriority();
+	return other.getPriority() - this.getPriority();
     }
+
+    public int getr(){
+	return row;
+    }
+
+    public int getc(){
+	return col;
+    }
+    
 }
