@@ -19,4 +19,12 @@ public class FrontierQueue implements Frontier{
     public int size(){
 	return queue.size();
     }
+
+    public Location peek(){
+	if (queue.size() > 0){
+	    return queue.peekFirst();
+	}else {
+	    return null;
+	}
+    }
 }

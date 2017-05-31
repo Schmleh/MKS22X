@@ -19,4 +19,12 @@ public class FrontierStack implements Frontier{
     public int size(){
 	return stack.size();
     }
+
+    public Location peek(){
+	if (stack.size() > 0){
+	    return stack.peekLast();
+	} else {
+	    return null;
+	}
+    }
 }

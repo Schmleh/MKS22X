@@ -31,8 +31,9 @@ public class MyHeap{
 
     public String remove(){
 	if (heep.size() > 1){
-	    String val =  heep.remove(1);
-	    heep.add(1,heep.remove(heep.size() - 1));
+	    String val =  heep.get(1);
+	    heep.add(1,heep.get(heep.size() - 1));
+	    heep.remove(heep.size() - 1);
 	    pushDown(1);
 	    return val;
 	} else {
@@ -123,6 +124,6 @@ public class MyHeap{
     // 	System.out.println(hey.toString());
     // 	System.out.println(hey.remove());
     // 	System.out.println(hey.toString());
-	
+    
     // }
 }

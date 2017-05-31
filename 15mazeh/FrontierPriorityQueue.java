@@ -23,11 +23,20 @@ public class FrontierPriorityQueue implements Frontier{
 
     public Location next(){
 	if (heep.size() > 1){
-	    Location val =  heep.remove(1);
-	    heep.add(1,heep.remove(heep.size() - 1));
+	    Location val =  heep.get(1);
+	    heep.set(1,heep.get(heep.size() - 1));
+	    heep.remove(heep.size() - 1);
 	    pushDown(1);
 	    size -= 1;
 	    return val;
+	} else {
+	    return null;
+	}
+    }
+
+    public Location peek(){
+	if (heep.size() > 1){
+	    return heep.get(1);
 	} else {
 	    return null;
 	}

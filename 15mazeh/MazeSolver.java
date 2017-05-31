@@ -36,15 +36,11 @@ public class MazeSolver{
 	    break;
 	}
 	struct.add(maze.getStart());
-	while (!(struct.next().equals(null))){
+	while (!(struct.peek().equals(null))){
 	    Location now = struct.next();
-	    System.out.println(now.getr());
-	    System.out.println(maze.getEnd().getr());
-	    System.out.println(now.getc());
-	    System.out.println(maze.getEnd().getc());
 	    if ((now.getr() == maze.getEnd().getr()) && (now.getc() == maze.getEnd().getc())){
 		System.out.println(this.toString());
-		System.exit(0);
+	        return;
 	    }
 	    int times = 0;
 	    try {
@@ -94,14 +90,11 @@ public class MazeSolver{
     }
 
 
-    public static void main(String[] args){
-	MazeSolver ayo = new MazeSolver("one.txt");
-        ayo.solve(0);
-	ayo.solve(1);
-	ayo.solve(2);
-	ayo.solve(3);
-	MazeSolver yoa = new MazeSolver("two.txt");
+    //public static void main(String[] args){
+	//MazeSolver ayo = new MazeSolver("one.txt");;
+	//ayo.solve(3);
+	//MazeSolver yoa = new MazeSolver("two.txt");
 	//yoa.solve();
-    }
+	//}
     
 }

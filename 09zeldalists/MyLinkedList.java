@@ -1,5 +1,11 @@
 import java.util.*;
 
+/*Note for Mr. Konstantinovich, 5/30/17
+Alex Schevchenko (also Pd. 9) basically
+taught me how to do the all the "Iterable" parts, since
+I remembered almost none of it from when we learned it
+*/
+
 public class MyLinkedList implements Iterable<Integer>{
 
     private class Lnode{

@@ -39,8 +39,9 @@ public class IntHeap{
 
     public Integer remove(){
 	if (heep.size() > 1){
-	    Integer val =  heep.remove(1);
-	    heep.add(1,heep.remove(heep.size() - 1));
+	    Integer val =  heep.get(1);
+	    heep.set(1,heep.get(heep.size() - 1));
+	    heep.remove(heep.size() - 1);
 	    pushDown(1);
 	    size -= 1;
 	    return val;
@@ -122,9 +123,9 @@ public class IntHeap{
     }
 	    
     
-    public static void main(String[] args){
-     	IntHeap hey = new IntHeap(false);
-     	hey.add(127);
+    //public static void main(String[] args){
+    // 	IntHeap hey = new IntHeap(false);
+    // 	hey.add(127);
     //  	System.out.println(hey.toString());
     //  	hey.add(244);
     //  	System.out.println(hey.toString());
@@ -143,11 +144,11 @@ public class IntHeap{
     //  	hey.add(81);
     //  	System.out.println(hey.toString());
     //  	hey.remove();
-      	System.out.println(hey.peek());
+    //  	System.out.println(hey.remove());
     //  	hey.remove();	
     //  	System.out.println(hey.toString());
     //  	hey.remove();
     //  	System.out.println(hey.toString());
 	
-      }
+    //  }
 }
