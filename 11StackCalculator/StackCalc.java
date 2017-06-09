@@ -2,7 +2,7 @@ import java.util.*;
 
 public class StackCalc{
 
-    public static double evaluate(String m){
+    public static double eval(String m){
 	String[] terms = m.split(" ");
 	Stack<String> values = new Stack<String>();
 	for (String term : terms){
@@ -51,12 +51,5 @@ public class StackCalc{
 	    return "" + (Double.parseDouble(f) % Double.parseDouble(s));
 	}
     }
-
-     public static void main(String[] args){
-     	System.out.println(evaluate("2 3 -"));
-     	System.out.println(evaluate("4 5 % 7 9 + *"));
-     	System.out.println(evaluate("0 1 2 3 * + +"));
-     	System.out.println(evaluate("1 2 * 6 9 4 / * -"));
-     }
     
 }

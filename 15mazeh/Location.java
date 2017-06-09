@@ -1,6 +1,6 @@
 public class Location implements Comparable<Location>{
     private Integer row, col, distanceToStart, distanceToEnd;
-    Location previous;
+    public Location previous;
     private boolean aStar;
 
     public Location(Integer r, Integer c, Location yes,  Integer distToStart, Integer distToGoal, boolean aStarr){

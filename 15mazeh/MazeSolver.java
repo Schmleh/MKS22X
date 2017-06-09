@@ -36,11 +36,23 @@ public class MazeSolver{
 	    break;
 	}
 	struct.add(maze.getStart());
-	while (!(struct.peek().equals(null))){
+	while (null != struct.peek()){
 	    Location now = struct.next();
 	    if ((now.getr() == maze.getEnd().getr()) && (now.getc() == maze.getEnd().getc())){
-		System.out.println(this.toString());
-	        return;
+		//System.out.println("oogeldyboogeldy");
+		maze.set(now.getr(), now.getc(), '@');
+	        while (null != struct.peek()){
+		    for (Location thisone = struct.next(); null != thisone.previous; thisone = thisone.previous){
+			maze.set(thisone.getr(), thisone.getc(), '.');
+		    }
+		}
+		for (Location thisone = now; null != thisone.previous; thisone = thisone.previous){
+		    maze.set(thisone.getr(), thisone.getc(), '@');
+		}
+		if (alive){
+		    System.out.println(toString());
+		}
+		return;
 	    }
 	    int times = 0;
 	    try {
@@ -72,29 +84,36 @@ public class MazeSolver{
 		}
 	    } catch (IndexOutOfBoundsException e){}
 	    if (times == 0){
-		maze.set(now.getr(), now.getc(), '.');
+		for (Location thisone = now; null != thisone.previous; thisone = thisone.previous){
+		maze.set(thisone.getr(), thisone.getc(), '.');
+		}
 	    } else {
 		maze.set(now.getr(), now.getc(), '@');
 	    }
-	    System.out.println(this.toString());
+	    if (alive){
+		System.out.println(toString());
+	    }
 	}
-	System.out.println("No solution.");
     }
     
     public String toString(){
-	if (alive){
-	    return Maze.colorize(maze.toString());
-	}else {
-	    return maze.toString();
-	}
+	maze.clearTerminal();
+	return Maze.colorize(maze.toString());
+    }
+    
+    public String toString(int n){
+	return Maze.colorize(maze.toString(n));
     }
 
 
     //public static void main(String[] args){
-	//MazeSolver ayo = new MazeSolver("one.txt");;
-	//ayo.solve(3);
-	//MazeSolver yoa = new MazeSolver("two.txt");
-	//yoa.solve();
-	//}
-    
+    //	MazeSolver ayo = new MazeSolver("one.txt", true);
+    // 	ayo.solve(1);
+    //  ayo = new MazeSolver("one.txt");
+    //  ayo.solve(2);
+    //	ayo = new MazeSolver("one.txt");
+    // 	ayo.solve(3);
+    // 	ayo = new MazeSolver("one.txt");
+    // 	ayo.solve(4);
+    //}
 }
